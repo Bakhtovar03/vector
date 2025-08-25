@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center g-4">
+        {% for course in courses %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow hover-shadow p-3 bg-white rounded overflow-hidden transition-all duration-300 ease-in-out transform scale-100 hover:scale-105">
+                <img src="{{ course.image.url }}" class="card-img-top img-fluid w-full rounded-top" alt="{{ course.name }}">
+                <div class="card-body px-4 pb-4 pt-3">
+                    <h5 class="card-title fw-bold text-dark text-truncate mb-2">{{ course.name }}</h5>
+                    <ul class="list-unstyled small text-gray-600 mb-3">
+                        <li><strong>Возраст:</strong> {{ course.age_category }}</li>
+                        <li><strong>Преподаватель:</strong> {{ course.teacher }}</li>
+                    </ul>
+                    <a href="{{ course.get_absolute_url }}" class="stretched-link d-block text-decoration-none">
+                        <button class="btn btn-outline-primary btn-block w-100">Подробнее</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info text-center">Нет доступных курсов.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
