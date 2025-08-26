@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Запись на курс
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-md-center">
+    <div class="col-md-6 col-sm-12 p-4 border rounded bg-white shadow">
+        <h2 class="mb-4 text-center">{{ title }}</h2>
+
+        <!-- Форма -->
+        <form method="post" action="." novalidate>
+            {% csrf_token %}
+
+            <!-- Поле Имя -->
+            <div class="mb-3">
+                {% if form.name.errors %}
+                <div class="invalid-feedback d-block" style="display: block;">"Ошибка в имени"</div>
+                {% endif %}
+                <label for="{{ form.name.id_for_label }}">Имя:</label>
+                {{ form.name }}
+                <small class="form-text text-muted">Ваше полное имя</small>
+            </div>
+
+            <!-- Поле Имя ребёнка -->
+            <div class="mb-3">
+                {% if form.children_name.errors %}
+                <div class="invalid-feedback d-block" style="display: block;">"Ошибка в имени ребёнка"</div>
+                {% endif %}
+                <label for="{{ form.children_name.id_for_label }}">Имя ребёнка:</label>
+                {{ form.children_name }}
+                <small class="form-text text-muted">Имя вашего ребёнка</small>
+            </div>
+
+            <!-- Поле Возраст ребёнка -->
+            <div class="mb-3">
+                {% if form.children_age.errors %}
+                <div class="invalid-feedback d-block" style="display: block;">"Некорректный возраст ребёнка"</div>
+                {% endif %}
+                <label for="{{ form.children_age.id_for_label }}">Возраст ребёнка:</label>
+                {{ form.children_age }}
+                <small class="form-text text-muted">Укажите возраст ребёнка</small>
+            </div>
+
+            <!-- Способы связи -->
+            <fieldset class="mb-3">
+                <legend>Способы связи:</legend>
+
+                <!-- VK -->
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="vk" id="contact_vk" name="contact_method">
+                    <label class="form-check-label" for="contact_vk">VK</label>
+                </div>
+
+                <!-- Telegram -->
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="telegram" id="contact_telegram" name="contact_method">
+                    <label class="form-check-label" for="contact_telegram">Telegram</label>
+                </div>
+
+                <!-- Телефон -->
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="phone" id="contact_phone" name="contact_method">
+                    <label class="form-check-label" for="contact_phone">Телефон</label>
+                </div>
+            </fieldset>
+
+            <!-- Контактная информация -->
+            <div class="mb-3">
+                {% if form.contact.errors %}
+                <div class="invalid-feedback d-block" style="display: block;">"Неправильный номер телефона. <br>пример: +71234567890"</div>
+                {% endif %}
+                <label for="{{ form.contact.id_for_label }}">Контактный номер телефона:</label>
+                {{ form.contact }}
+                <small class="form-text text-muted">Введите ваш контактный номер телефона</small>
+            </div>
+
+            <!-- Ссылка на VK -->
+            <div class="mb-3">
+                {% if form.vk_url.errors %}
+                <div class="invalid-feedback d-block" style="display: block;">"Ошибка в ссылке на VK"</div>
+                {% endif %}
+                <label for="{{ form.vk_url.id_for_label }}">Страничка VK:</label>
+                {{ form.vk_url }}
+                <small class="form-text text-muted">Опционально добавьте ссылку на вашу страницу в VK</small>
+            </div>
+
+            <!-- Кнопка отправки -->
+            <button type="submit" class="btn btn-dark w-100 mt-4">Отправить заявку</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
