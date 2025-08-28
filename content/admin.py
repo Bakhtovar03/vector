@@ -1,7 +1,7 @@
 from django.contrib import admin
-
+from pytils.translit import slugify
 from content.models import Teacher, Course
-
+from uuid import uuid4
 
 # Register your models here.
 @admin.register(Teacher)
@@ -16,3 +16,8 @@ class CourseAdmin(admin.ModelAdmin):
     list_filter = ('teacher','age_category')
     search_fields = ('name','teacher','age_category')
     ordering = ('name',)
+
+    exclude = ['slug']
+    def save_model(self, request, obj, form, change):
+        obj.slug = f'{slugify(obj.name)}-{uuid4().hex[:4]}'
+        super().save_model(request,obj,form,change)

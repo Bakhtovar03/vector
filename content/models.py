@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.urls import reverse
@@ -17,6 +19,8 @@ class Teacher(models.Model):
     avatar = models.ImageField(default='avatars/default.png',
                                upload_to='avatars/%Y/%m',null = True,blank = True,
                                validators=[FileExtensionValidator(['jpg','png','jpeg','webp'])])
+
+    updated_at = models.DateTimeField(auto_now=True)
 
     birthday = models.DateField(verbose_name='Дата рождения')
 
@@ -50,15 +54,13 @@ class Course(models.Model):
                               upload_to='images/%Y/%m',
                               null = True,
                               blank = True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
     class Meta:
         verbose_name ='Курс'
         verbose_name_plural='Курсы'
 
-    def save(self, *args, **kwargs):
-        self.slug = f'{slugify(self.name)}-{self.id}'
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

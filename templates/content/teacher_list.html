@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}{{ title }}{% endblock %}
+
+{% block styles %}
+    <style>
+        .teacher-card {
+            height: 100%;
+        }
+
+        .teacher-image {
+            width: 150px !important; /* Фиксированный размер */
+            height: 150px !important; /* Фиксированный размер */
+            object-fit: cover; /* Обрезка изображения */
+            margin-bottom: 1rem;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
     <h1 class="mb-4">Наши преподаватели</h1>
@@ -8,8 +26,9 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {% for teacher in teachers %}
                 <div class="col">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="{% if teacher.avatar %}{{ teacher.avatar.url }}{% else %}/static/avatars/default.png{% endif %}" alt="{{ teacher.name }} {{ teacher.last_name }}" class="card-img-top rounded-circle w-75 mx-auto my-3">
+                    <div class="card h-100 shadow-sm border-0 teacher-card">
+                        <img src="{% if teacher.avatar %}{{ teacher.avatar.url }}{% else %}{% static 'avatars/default.png' %}{% endif %}"
+                             alt="{{ teacher.name }} {{ teacher.last_name }}" class="card-img-top rounded-circle w-75 mx-auto my-3 teacher-image">
 
                         <div class="card-body text-center">
                             <h5 class="card-title mb-3 fw-bold">{{ teacher.name }} {{ teacher.last_name }}</h5>
@@ -44,6 +63,4 @@
         <p>Нет преподавателей.</p>
     {% endif %}
 </div>
-<!-- Скрипты Bootstrap -->
-
 {% endblock %}
