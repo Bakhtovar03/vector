@@ -20,7 +20,7 @@
                 {% endif %}
                 <label for="{{ form.name.id_for_label }}">Имя:</label>
                 {{ form.name }}
-                <small class="form-text text-muted">Ваше полное имя</small>
+                <small class="form-text text-muted">Ваше ФИО</small>
             </div>
 
             <!-- Поле Имя ребёнка -->
@@ -46,7 +46,9 @@
             <!-- Способы связи -->
             <fieldset class="mb-3">
                 <legend>Способы связи:</legend>
-
+                {% if form.contact_method.errors %}
+                <div class = 'invalid-feedback d-block' style="display: block;">Выберите удобный способ связи</div>
+                {% endif %}
                 <!-- VK -->
                 <div class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" value="vk" id="contact_vk" name="contact_method">

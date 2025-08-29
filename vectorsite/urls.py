@@ -8,6 +8,7 @@ from vectorsite import settings
 from django.contrib.sitemaps.views import sitemap
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/',include('accounts.urls')),
     path('',include('content.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]

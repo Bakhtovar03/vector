@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'content',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'accounts',
 ]
 
 MIDDLEWARE = [
