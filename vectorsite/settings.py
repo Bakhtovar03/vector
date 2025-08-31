@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-=9yvg_!bgqn0ej0u(j694x*e)xpgcwzrbjpfsz93c)j8rh!k15
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -68,11 +68,14 @@ WSGI_APPLICATION = 'vectorsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'vector',
+        'USER': 'vector',
+        'PASSWORD': 'vector2025',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

@@ -16,5 +16,5 @@ class UserProfile(admin.ModelAdmin):
     exclude = ['slug']
 
     def save_model(self, request, obj, form, change):
-        obj.slug = f'{slugify(obj.username)}-{uuid4().hex[:4]}'
+        obj.slug = f'{slugify(obj.user)}-{uuid4().hex[:4]}'
         super().save_model(request, obj, form, change)

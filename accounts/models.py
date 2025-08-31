@@ -17,8 +17,9 @@ class UserProfile(models.Model):
         verbose_name_plural = 'Профили пользователей'
 
     def __str__(self):
-        return f'profile-{self.user.username}'
+        return f'profile-{self.user}'
 
     def get_absolute_url(self):
         return reverse('profile', kwargs={'slug': self.slug})
+
 
