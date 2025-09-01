@@ -10,12 +10,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=9yvg_!bgqn0ej0u(j694x*e)xpgcwzrbjpfsz93c)j8rh!k15'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.getenv("DEBUG",False))
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*'] if DEBUG else ['*']
 
 
 # Application definition
@@ -69,11 +69,11 @@ WSGI_APPLICATION = 'vectorsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'vector',
-        'USER': 'vector',
-        'PASSWORD': 'vector2025',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.environ.get('POSTGRES_DB',''),
+        'USER': os.environ.get('POSTGRES_USER',''),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD',''),
+        'HOST': os.environ.get('DB_HOST',''),
+        'PORT': int(os.environ.get('DB_PORT','5432')),
     }
 }
 

@@ -1,0 +1,67 @@
+# Исключение временных файлов и кешей
+__pycache__/
+*.py[cod]
+*.so
+*.pyo
+
+# Исполняемые файлы и двоичные артефакты
+*.exe
+*.dll
+*.dylib
+
+# Папки, создаваемые IDE и инструментами
+.idea
+.vscode
+.env*
+node_modules
+.coverage
+.cache
+.pycache
+venv
+
+# Временные файлы и директории
+logs/*
+tmp/*
+
+# SQLite DB (если используется SQLite)
+*.sqlite3
+
+# Директории для миграции
+migrations/
+
+# Файлы статистики покрытия кода
+.coverage
+.nocov
+
+# Директории виртуального окружения
+virtualenv/
+venv/
+
+# Редакторские файлы и метаданные
+.git
+.DS_Store
+thumbs.db
+.DS_Store?
+.egg-info
+
+# Файлы с секретами и прочей чувствительной информацией
+.env
+.settings_local.py
+local_settings.py
+
+# Артефакты упаковки и сборки
+dist
+build
+MANIFEST.in
+README.rst
+CHANGELOG.rst
+setup.cfg
+setup.py
+
+# Документация и прочие вспомогательные файлы
+doc/
+docs/
+*.md
+LICENSE
+Makefile
+Makefile.local
