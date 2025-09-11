@@ -2,9 +2,11 @@
 services:
   web:
     build: .
-    command: -C "python manage.py collectstatic --noinput && exec gunicorn myproject.wsgi:application --bind 0.0.0.0:${PORT:-8000}"
+    command: bash -c "python manage.py collectstatic --noinput && exec gunicorn vectorsite.wsgi:application --bind 0.0.0.0:${PORT:-8000}"  # Используем правильный модуль vectorsite
     volumes:
       - .:/vector
+      - static_volume:/vector/static_root  # Том для статических файлов
+      - media_volume:/vector/media
     ports:
       - "${PORT:-8000}:${PORT:-8000}"
     depends_on:
@@ -23,7 +25,19 @@ services:
     expose:
       - "5432"
 
+  nginx:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/vector/static_root  # Подключение тома с статикой
+      - media_volume:/vector/media
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
 volumes:
   db_data:
-
-
+  static_volume:
+  media_volume:
